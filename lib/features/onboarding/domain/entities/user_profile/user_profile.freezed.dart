@@ -76,7 +76,7 @@ class _$UserProfileCopyWithImpl<$Res, $Val extends UserProfile>
     Object? ageYears = null,
     Object? gender = null,
     Object? goal = null,
-    Object? level = freezed,
+    Object? level = null,
     Object? workoutDaysPerWeek = null,
     Object? bmi = null,
     Object? bmr = null,
@@ -106,7 +106,7 @@ class _$UserProfileCopyWithImpl<$Res, $Val extends UserProfile>
           ? _value.goal
           : goal // ignore: cast_nullable_to_non_nullable
               as FitnessGoal,
-      level: freezed == level
+      level: null == level
           ? _value.level
           : level // ignore: cast_nullable_to_non_nullable
               as FitnessLevel,
@@ -179,7 +179,7 @@ class __$$UserProfileImplCopyWithImpl<$Res>
     Object? ageYears = null,
     Object? gender = null,
     Object? goal = null,
-    Object? level = freezed,
+    Object? level = null,
     Object? workoutDaysPerWeek = null,
     Object? bmi = null,
     Object? bmr = null,
@@ -209,7 +209,7 @@ class __$$UserProfileImplCopyWithImpl<$Res>
           ? _value.goal
           : goal // ignore: cast_nullable_to_non_nullable
               as FitnessGoal,
-      level: freezed == level
+      level: null == level
           ? _value.level
           : level // ignore: cast_nullable_to_non_nullable
               as FitnessLevel,
@@ -284,7 +284,7 @@ class _$UserProfileImpl implements _UserProfile {
                 other.ageYears == ageYears) &&
             (identical(other.gender, gender) || other.gender == gender) &&
             (identical(other.goal, goal) || other.goal == goal) &&
-            const DeepCollectionEquality().equals(other.level, level) &&
+            (identical(other.level, level) || other.level == level) &&
             (identical(other.workoutDaysPerWeek, workoutDaysPerWeek) ||
                 other.workoutDaysPerWeek == workoutDaysPerWeek) &&
             (identical(other.bmi, bmi) || other.bmi == bmi) &&
@@ -292,18 +292,8 @@ class _$UserProfileImpl implements _UserProfile {
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      userId,
-      weightKg,
-      heightCm,
-      ageYears,
-      gender,
-      goal,
-      const DeepCollectionEquality().hash(level),
-      workoutDaysPerWeek,
-      bmi,
-      bmr);
+  int get hashCode => Object.hash(runtimeType, userId, weightKg, heightCm,
+      ageYears, gender, goal, level, workoutDaysPerWeek, bmi, bmr);
 
   /// Create a copy of UserProfile
   /// with the given fields replaced by the non-null parameter values.

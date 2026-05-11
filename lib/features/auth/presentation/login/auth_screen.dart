@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:daily_reboot_tracker/features/auth/presentation/view_model/auth_view_model.dart';
+import 'package:daily_reboot_tracker/features/auth/presentation/login/view_model/login_view_model.dart';
 
 class AuthScreen extends HookConsumerWidget {
   const AuthScreen({super.key, required this.onLogin});

@@ -1,31 +1,32 @@
+import 'package:daily_reboot_tracker/features/auth/data/models/entities/user/user_entity.dart';
+import 'package:daily_reboot_tracker/features/auth/domain/usecase/user_usecases.dart';
+import 'package:daily_reboot_tracker/features/auth/domain/usecase/user_usecases_impl.dart';
 import 'package:hive/hive.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'package:daily_reboot_tracker/core/di/providers.dart';
-import 'package:daily_reboot_tracker/features/auth/data/models/local/user/user_local_model.dart';
 import 'package:daily_reboot_tracker/features/auth/data/repository/user_repository_impl.dart';
-import 'package:daily_reboot_tracker/features/auth/data/service/local/user/user_local_service.dart';
-import 'package:daily_reboot_tracker/features/auth/data/service/local/user/user_local_service_impl.dart';
-import 'package:daily_reboot_tracker/features/auth/data/service/network/user/user_network_service.dart';
-import 'package:daily_reboot_tracker/features/auth/data/service/network/user/user_network_service_impl.dart';
+import 'package:daily_reboot_tracker/features/auth/data/data_source/local/user_local_service.dart';
+import 'package:daily_reboot_tracker/features/auth/data/data_source/local/user_local_service_impl.dart';
 import 'package:daily_reboot_tracker/features/auth/domain/repository/user_repository.dart';
 
-final userBoxProvider = Provider<Box<UserLocalModel>>(
+final userBoxProvider = Provider<Box<UserEntity>>(
   (ref) => throw UnimplementedError('Override userBoxProvider in main().'),
 );
 
-final userLocalServiceProvider = Provider<UserLocalService>((ref) {
-  final box = ref.watch(userBoxProvider);
-  return UserLocalServiceImpl(box);
-});
+final userHiveConfigProvider = hiveConfigProvider<UserEntity>(userBoxProvider);
 
-final userNetworkServiceProvider = Provider<UserNetworkService>((ref) {
-  final dio = ref.watch(dioProvider);
-  return UserNetworkServiceImpl(dio);
+final userLocalServiceProvider = Provider<UserLocalService>((ref) {
+  final hiveConfig = ref.watch(userHiveConfigProvider);
+  return UserLocalServiceImpl(hiveConfig);
 });
 
 final userRepositoryProvider = Provider<UserRepository>((ref) {
   final localService = ref.watch(userLocalServiceProvider);
-  final networkService = ref.watch(userNetworkServiceProvider);
-  return UserRepositoryImpl(localService, networkService);
+  return UserRepositoryImpl(localService);
+});
+
+final userUsecaseProvider = Provider<UserUsecases>((ref) {
+  final userRepository = ref.watch(userRepositoryProvider);
+  return UserUsecasesImpl(userRepository);
 });

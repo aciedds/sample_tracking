@@ -5,7 +5,8 @@ import 'package:daily_reboot_tracker/features/workout_session/data/models/local/
 import 'session_local_service.dart';
 
 class SessionLocalServiceImpl extends SessionLocalService {
-  SessionLocalServiceImpl(Box<SessionLocalModel> box) : _hiveConfig = HiveConfig<SessionLocalModel>(box);
+  SessionLocalServiceImpl(Box<SessionLocalModel> box)
+      : _hiveConfig = HiveConfig<SessionLocalModel>(box);
 
   final HiveConfig<SessionLocalModel> _hiveConfig;
 

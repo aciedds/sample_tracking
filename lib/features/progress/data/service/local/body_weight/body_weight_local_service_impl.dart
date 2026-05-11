@@ -5,7 +5,8 @@ import 'package:daily_reboot_tracker/features/progress/data/models/local/body_we
 import 'body_weight_local_service.dart';
 
 class BodyWeightLocalServiceImpl extends BodyWeightLocalService {
-  BodyWeightLocalServiceImpl(Box<BodyWeightLocalModel> box) : _hiveConfig = HiveConfig<BodyWeightLocalModel>(box);
+  BodyWeightLocalServiceImpl(Box<BodyWeightLocalModel> box)
+      : _hiveConfig = HiveConfig<BodyWeightLocalModel>(box);
 
   final HiveConfig<BodyWeightLocalModel> _hiveConfig;
 

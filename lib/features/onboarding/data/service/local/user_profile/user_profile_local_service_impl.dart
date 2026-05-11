@@ -5,7 +5,8 @@ import 'package:daily_reboot_tracker/features/onboarding/data/models/local/user_
 import 'user_profile_local_service.dart';
 
 class UserProfileLocalServiceImpl extends UserProfileLocalService {
-  UserProfileLocalServiceImpl(Box<UserProfileLocalModel> box) : _hiveConfig = HiveConfig<UserProfileLocalModel>(box);
+  UserProfileLocalServiceImpl(Box<UserProfileLocalModel> box)
+      : _hiveConfig = HiveConfig<UserProfileLocalModel>(box);
 
   final HiveConfig<UserProfileLocalModel> _hiveConfig;
 

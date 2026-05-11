@@ -5,7 +5,8 @@ import 'package:daily_reboot_tracker/features/onboarding/data/models/local/worko
 import 'workout_day_local_service.dart';
 
 class WorkoutDayLocalServiceImpl extends WorkoutDayLocalService {
-  WorkoutDayLocalServiceImpl(Box<WorkoutDayLocalModel> box) : _hiveConfig = HiveConfig<WorkoutDayLocalModel>(box);
+  WorkoutDayLocalServiceImpl(Box<WorkoutDayLocalModel> box)
+      : _hiveConfig = HiveConfig<WorkoutDayLocalModel>(box);
 
   final HiveConfig<WorkoutDayLocalModel> _hiveConfig;
 

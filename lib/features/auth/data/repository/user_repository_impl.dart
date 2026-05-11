@@ -1,46 +1,94 @@
+import 'package:daily_reboot_tracker/core/state/data/data_state.dart';
+import 'package:daily_reboot_tracker/features/auth/data/models/entities/user/user_entity.dart';
+import 'package:daily_reboot_tracker/features/auth/domain/entities/user/user.dart';
 import 'package:daily_reboot_tracker/features/auth/domain/repository/user_repository.dart';
-import 'package:daily_reboot_tracker/features/auth/data/models/local/user/user_local_model.dart';
-import 'package:daily_reboot_tracker/features/auth/data/models/network/user/user_network_model.dart';
-import 'package:daily_reboot_tracker/features/auth/data/service/local/user/user_local_service.dart';
-import 'package:daily_reboot_tracker/features/auth/data/service/network/user/user_network_service.dart';
+import 'package:daily_reboot_tracker/features/auth/data/data_source/local/user_local_service.dart';
 
 class UserRepositoryImpl extends UserRepository {
-  UserRepositoryImpl(this._localService, this._networkService);
-
   final UserLocalService _localService;
-  final UserNetworkService _networkService;
+  UserRepositoryImpl(this._localService);
 
   @override
-  Future<void> createLocal(String key, UserLocalModel value) async =>
-      _localService.create(key, value);
+  Future<DataState<bool>> clearCurrentSession() async {
+    try {
+      final result = await _localService.clearCurrentSession();
+      return DataState.success(data: result);
+    } catch (e, stackTrace) {
+      return DataState.failed(
+        exception: e,
+        message: e.toString(),
+        stackTrace: stackTrace,
+      );
+    }
+  }
 
   @override
-  UserLocalModel? readLocal(String key) => _localService.read(key);
+  Future<DataState<bool>> createNewUser(User userData) async {
+    try {
+      final result = await _localService.createNewUser(
+        email: userData.email,
+        displayName: userData.displayName,
+        displayPicture: userData.photoUrl,
+      );
+      return DataState.success(data: result);
+    } catch (e, stackTrace) {
+      return DataState.failed(
+        exception: e,
+        message: e.toString(),
+        stackTrace: stackTrace,
+      );
+    }
+  }
 
   @override
-  Future<void> updateLocal(String key, UserLocalModel value) async =>
-      _localService.update(key, value);
+  DataState<User> findUserByEmail(String email) {
+    try {
+      final result = _localService.findUserByEmail(email);
+      if (result != null) {
+        return DataState.success(data: result.toDomain());
+      } else {
+        return DataState.failed(message: "Data Not Found");
+      }
+    } catch (e, stackTrace) {
+      return DataState.failed(
+        exception: e,
+        message: e.toString(),
+        stackTrace: stackTrace,
+      );
+    }
+  }
 
   @override
-  Future<void> deleteLocal(String key) async => _localService.delete(key);
+  DataState<User> getCurrentSession() {
+    try {
+      final result = _localService.getCurrentSession();
+      if (result != null) {
+        return DataState.success(data: result.toDomain());
+      } else {
+        return DataState.failed(message: "Data Not Found");
+      }
+    } catch (e, stackTrace) {
+      return DataState.failed(
+        exception: e,
+        message: e.toString(),
+        stackTrace: stackTrace,
+      );
+    }
+  }
 
   @override
-  List<UserLocalModel> readAllLocal() => _localService.readAll();
-
-  @override
-  Future<void> createNetwork(String key, UserNetworkModel value) async =>
-      _networkService.create(key, value);
-
-  @override
-  Future<UserNetworkModel?> readNetwork(String key) => _networkService.read(key);
-
-  @override
-  Future<void> updateNetwork(String key, UserNetworkModel value) async =>
-      _networkService.update(key, value);
-
-  @override
-  Future<void> deleteNetwork(String key) async => _networkService.delete(key);
-
-  @override
-  Future<List<UserNetworkModel>> readAllNetwork() => _networkService.readAll();
+  Future<DataState<bool>> saveCurrentSession(User userData) async {
+    try {
+      final result = await _localService.saveCurrentSession(
+        UserEntity.fromDomain(userData),
+      );
+      return DataState.success(data: result);
+    } catch (e, stackTrace) {
+      return DataState.failed(
+        exception: e,
+        message: e.toString(),
+        stackTrace: stackTrace,
+      );
+    }
+  }
 }

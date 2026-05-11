@@ -18,9 +18,10 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$User {
   String get id => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
+  DateTime get createdAt => throw _privateConstructorUsedError;
+  DateTime get updatedAt => throw _privateConstructorUsedError;
   String? get displayName => throw _privateConstructorUsedError;
   String? get photoUrl => throw _privateConstructorUsedError;
-  DateTime get createdAt => throw _privateConstructorUsedError;
 
   /// Create a copy of User
   /// with the given fields replaced by the non-null parameter values.
@@ -36,9 +37,10 @@ abstract class $UserCopyWith<$Res> {
   $Res call(
       {String id,
       String email,
+      DateTime createdAt,
+      DateTime updatedAt,
       String? displayName,
-      String? photoUrl,
-      DateTime createdAt});
+      String? photoUrl});
 }
 
 /// @nodoc
@@ -58,9 +60,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
   $Res call({
     Object? id = null,
     Object? email = null,
+    Object? createdAt = null,
+    Object? updatedAt = null,
     Object? displayName = freezed,
     Object? photoUrl = freezed,
-    Object? createdAt = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -71,6 +74,14 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      updatedAt: null == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
       displayName: freezed == displayName
           ? _value.displayName
           : displayName // ignore: cast_nullable_to_non_nullable
@@ -79,10 +90,6 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.photoUrl
           : photoUrl // ignore: cast_nullable_to_non_nullable
               as String?,
-      createdAt: null == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
     ) as $Val);
   }
 }
@@ -97,9 +104,10 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
   $Res call(
       {String id,
       String email,
+      DateTime createdAt,
+      DateTime updatedAt,
       String? displayName,
-      String? photoUrl,
-      DateTime createdAt});
+      String? photoUrl});
 }
 
 /// @nodoc
@@ -116,9 +124,10 @@ class __$$UserImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? email = null,
+    Object? createdAt = null,
+    Object? updatedAt = null,
     Object? displayName = freezed,
     Object? photoUrl = freezed,
-    Object? createdAt = null,
   }) {
     return _then(_$UserImpl(
       id: null == id
@@ -129,6 +138,14 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      updatedAt: null == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
       displayName: freezed == displayName
           ? _value.displayName
           : displayName // ignore: cast_nullable_to_non_nullable
@@ -137,10 +154,6 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value.photoUrl
           : photoUrl // ignore: cast_nullable_to_non_nullable
               as String?,
-      createdAt: null == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
     ));
   }
 }
@@ -151,24 +164,27 @@ class _$UserImpl implements _User {
   const _$UserImpl(
       {required this.id,
       required this.email,
+      required this.createdAt,
+      required this.updatedAt,
       this.displayName,
-      this.photoUrl,
-      required this.createdAt});
+      this.photoUrl});
 
   @override
   final String id;
   @override
   final String email;
   @override
+  final DateTime createdAt;
+  @override
+  final DateTime updatedAt;
+  @override
   final String? displayName;
   @override
   final String? photoUrl;
-  @override
-  final DateTime createdAt;
 
   @override
   String toString() {
-    return 'User(id: $id, email: $email, displayName: $displayName, photoUrl: $photoUrl, createdAt: $createdAt)';
+    return 'User(id: $id, email: $email, createdAt: $createdAt, updatedAt: $updatedAt, displayName: $displayName, photoUrl: $photoUrl)';
   }
 
   @override
@@ -178,17 +194,19 @@ class _$UserImpl implements _User {
             other is _$UserImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.email, email) || other.email == email) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
+            (identical(other.updatedAt, updatedAt) ||
+                other.updatedAt == updatedAt) &&
             (identical(other.displayName, displayName) ||
                 other.displayName == displayName) &&
             (identical(other.photoUrl, photoUrl) ||
-                other.photoUrl == photoUrl) &&
-            (identical(other.createdAt, createdAt) ||
-                other.createdAt == createdAt));
+                other.photoUrl == photoUrl));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, email, displayName, photoUrl, createdAt);
+  int get hashCode => Object.hash(
+      runtimeType, id, email, createdAt, updatedAt, displayName, photoUrl);
 
   /// Create a copy of User
   /// with the given fields replaced by the non-null parameter values.
@@ -203,20 +221,23 @@ abstract class _User implements User {
   const factory _User(
       {required final String id,
       required final String email,
+      required final DateTime createdAt,
+      required final DateTime updatedAt,
       final String? displayName,
-      final String? photoUrl,
-      required final DateTime createdAt}) = _$UserImpl;
+      final String? photoUrl}) = _$UserImpl;
 
   @override
   String get id;
   @override
   String get email;
   @override
+  DateTime get createdAt;
+  @override
+  DateTime get updatedAt;
+  @override
   String? get displayName;
   @override
   String? get photoUrl;
-  @override
-  DateTime get createdAt;
 
   /// Create a copy of User
   /// with the given fields replaced by the non-null parameter values.

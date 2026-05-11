@@ -1,34 +1,35 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'user_local_model.dart';
+part of 'user_entity.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class UserLocalModelAdapter extends TypeAdapter<UserLocalModel> {
+class UserEntityAdapter extends TypeAdapter<UserEntity> {
   @override
   final int typeId = 1;
 
   @override
-  UserLocalModel read(BinaryReader reader) {
+  UserEntity read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return UserLocalModel(
+    return UserEntity(
       id: fields[0] as String,
       email: fields[1] as String,
+      createdAt: fields[4] as DateTime,
+      updatedAt: fields[5] as DateTime,
       displayName: fields[2] as String?,
       photoUrl: fields[3] as String?,
-      createdAt: fields[4] as DateTime,
     );
   }
 
   @override
-  void write(BinaryWriter writer, UserLocalModel obj) {
+  void write(BinaryWriter writer, UserEntity obj) {
     writer
-      ..writeByte(5)
+      ..writeByte(6)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -38,7 +39,9 @@ class UserLocalModelAdapter extends TypeAdapter<UserLocalModel> {
       ..writeByte(3)
       ..write(obj.photoUrl)
       ..writeByte(4)
-      ..write(obj.createdAt);
+      ..write(obj.createdAt)
+      ..writeByte(5)
+      ..write(obj.updatedAt);
   }
 
   @override
@@ -47,7 +50,7 @@ class UserLocalModelAdapter extends TypeAdapter<UserLocalModel> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is UserLocalModelAdapter &&
+      other is UserEntityAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

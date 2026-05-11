@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'package:daily_reboot_tracker/features/app/presentation/app_flow_controller.dart';
-import 'package:daily_reboot_tracker/features/auth/presentation/auth_screen.dart';
+import 'package:daily_reboot_tracker/features/auth/presentation/login/auth_screen.dart';
 import 'package:daily_reboot_tracker/features/home/presentation/post_login_shell_screen.dart';
 import 'package:daily_reboot_tracker/features/onboarding/presentation/onboarding_screen.dart';
 import 'package:daily_reboot_tracker/features/onboarding/presentation/post_login_setup_screen.dart';

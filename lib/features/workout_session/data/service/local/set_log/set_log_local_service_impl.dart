@@ -5,7 +5,8 @@ import 'package:daily_reboot_tracker/features/workout_session/data/models/local/
 import 'set_log_local_service.dart';
 
 class SetLogLocalServiceImpl extends SetLogLocalService {
-  SetLogLocalServiceImpl(Box<SetLogLocalModel> box) : _hiveConfig = HiveConfig<SetLogLocalModel>(box);
+  SetLogLocalServiceImpl(Box<SetLogLocalModel> box)
+      : _hiveConfig = HiveConfig<SetLogLocalModel>(box);
 
   final HiveConfig<SetLogLocalModel> _hiveConfig;
 

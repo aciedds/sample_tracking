@@ -25,4 +25,8 @@ class HiveConfig<T> {
   List<T> readAll() {
     return _box.values.toList(growable: false);
   }
+
+  T? findByField(bool Function(T) test) {
+    return _box.values.firstWhere(test);
+  }
 }

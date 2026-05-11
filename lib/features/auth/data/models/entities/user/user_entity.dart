@@ -1,17 +1,17 @@
+import 'package:daily_reboot_tracker/features/auth/domain/entities/user/user.dart';
 import 'package:hive/hive.dart';
 
-import '../../../../domain/entities/user/user.dart';
-
-part 'user_local_model.g.dart';
+part 'user_entity.g.dart';
 
 @HiveType(typeId: 1)
-class UserLocalModel {
-  const UserLocalModel({
+class UserEntity {
+  const UserEntity({
     required this.id,
     required this.email,
+    required this.createdAt,
+    required this.updatedAt,
     this.displayName,
     this.photoUrl,
-    required this.createdAt,
   });
 
   @HiveField(0)
@@ -29,19 +29,24 @@ class UserLocalModel {
   @HiveField(4)
   final DateTime createdAt;
 
-  User toEntity() => User(
+  @HiveField(5)
+  final DateTime updatedAt;
+
+  User toDomain() => User(
         id: id,
         email: email,
         displayName: displayName,
         photoUrl: photoUrl,
         createdAt: createdAt,
+        updatedAt: updatedAt,
       );
 
-  factory UserLocalModel.fromEntity(User entity) => UserLocalModel(
+  factory UserEntity.fromDomain(User entity) => UserEntity(
         id: entity.id,
         email: entity.email,
         displayName: entity.displayName,
         photoUrl: entity.photoUrl,
         createdAt: entity.createdAt,
+        updatedAt: entity.updatedAt,
       );
 }

@@ -9,13 +9,21 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+
+  # State management:
   flutter_riverpod: ^2.6.1
   riverpod: ^2.6.1
   riverpod_annotation: ^2.6.1
+  # UI Management:
   flutter_hooks: ^0.21.2
   hooks_riverpod: ^2.6.1
+  # Local Storage Management
   hive: ^2.2.3
   hive_flutter: ^1.1.0
+  # - UUID {Local Id generator}
+  uuid: ^4.5.3
+
+  #Network Management
   dio: ^5.9.2
   freezed_annotation: ^2.4.4
   json_annotation: ^4.9.0

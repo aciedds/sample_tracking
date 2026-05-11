@@ -5,7 +5,8 @@ import 'package:daily_reboot_tracker/features/schedule/data/models/local/schedul
 import 'schedule_day_local_service.dart';
 
 class ScheduleDayLocalServiceImpl extends ScheduleDayLocalService {
-  ScheduleDayLocalServiceImpl(Box<ScheduleDayLocalModel> box) : _hiveConfig = HiveConfig<ScheduleDayLocalModel>(box);
+  ScheduleDayLocalServiceImpl(Box<ScheduleDayLocalModel> box)
+      : _hiveConfig = HiveConfig<ScheduleDayLocalModel>(box);
 
   final HiveConfig<ScheduleDayLocalModel> _hiveConfig;
 
