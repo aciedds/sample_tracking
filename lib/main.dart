@@ -1,8 +1,8 @@
+import 'package:daily_reboot_tracker/features/auth/presentation/auth_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'package:daily_reboot_tracker/features/app/presentation/app_flow_controller.dart';
-import 'package:daily_reboot_tracker/features/auth/presentation/login/auth_screen.dart';
 import 'package:daily_reboot_tracker/features/home/presentation/post_login_shell_screen.dart';
 import 'package:daily_reboot_tracker/features/onboarding/presentation/onboarding_screen.dart';
 import 'package:daily_reboot_tracker/features/onboarding/presentation/post_login_setup_screen.dart';
@@ -35,7 +35,7 @@ class DailyRebootApp extends HookConsumerWidget {
               ref.read(appStageProvider.notifier).state = AppStage.auth,
         ),
         AppStage.auth => AuthScreen(
-          onLogin: () =>
+          onAuthenticated: () =>
               ref.read(appStageProvider.notifier).state = AppStage.postLoginSetup,
         ),
         AppStage.postLoginSetup => PostLoginSetupScreen(

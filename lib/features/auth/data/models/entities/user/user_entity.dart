@@ -12,6 +12,7 @@ class UserEntity {
     required this.updatedAt,
     this.displayName,
     this.photoUrl,
+    this.password,
   });
 
   @HiveField(0)
@@ -32,6 +33,10 @@ class UserEntity {
   @HiveField(5)
   final DateTime updatedAt;
 
+  /// Stored for local auth only (sample app — not for production).
+  @HiveField(6)
+  final String? password;
+
   User toDomain() => User(
         id: id,
         email: email,
@@ -41,12 +46,13 @@ class UserEntity {
         updatedAt: updatedAt,
       );
 
-  factory UserEntity.fromDomain(User entity) => UserEntity(
+  factory UserEntity.fromDomain(User entity, {String? password}) => UserEntity(
         id: entity.id,
         email: entity.email,
         displayName: entity.displayName,
         photoUrl: entity.photoUrl,
         createdAt: entity.createdAt,
         updatedAt: entity.updatedAt,
+        password: password,
       );
 }

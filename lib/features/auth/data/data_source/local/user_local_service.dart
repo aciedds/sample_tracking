@@ -5,6 +5,7 @@ abstract class UserLocalService {
     required String email,
     String? displayName,
     String? displayPicture,
+    String? password,
   });
   UserEntity? findUserByEmail(String email);
   Future<bool> saveCurrentSession(UserEntity userId);

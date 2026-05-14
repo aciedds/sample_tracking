@@ -7,7 +7,7 @@ abstract class UserUsecases {
     required String password,
     required String validatePassword,
   });
-  Future<DataState<bool>> login(String email);
+  Future<DataState<bool>> login(String email, String password);
   Future<DataState<User>> profile();
   Future<bool> logout();
 }

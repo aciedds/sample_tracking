@@ -29,6 +29,7 @@ class UserLocalServiceImpl extends UserLocalService {
     required String email,
     String? displayName,
     String? displayPicture,
+    String? password,
   }) async {
     try {
       //
@@ -42,6 +43,7 @@ class UserLocalServiceImpl extends UserLocalService {
             email: email,
             createdAt: createdAt,
             updatedAt: updatedAt,
+            password: password,
           ));
       return true;
     } catch (e) {

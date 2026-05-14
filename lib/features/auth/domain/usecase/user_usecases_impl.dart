@@ -8,18 +8,11 @@ class UserUsecasesImpl implements UserUsecases {
   UserUsecasesImpl(this._userRepository);
 
   @override
-  Future<DataState<bool>> login(String email) async {
-    final result = _userRepository.findUserByEmail(email);
-    return result.when(success: (userData) {
-      _userRepository.saveCurrentSession(userData);
-      return DataState.success(data: true);
-    }, failed: (message, data, exception, stackTrace) {
-      return DataState.failed(
-        message: message,
-        exception: exception,
-        stackTrace: stackTrace,
-      );
-    });
+  Future<DataState<bool>> login(String email, String password) async {
+    return _userRepository.signInWithCredentials(
+      email: email,
+      password: password,
+    );
   }
 
   @override
@@ -49,10 +42,13 @@ class UserUsecasesImpl implements UserUsecases {
         return DataState.failed(message: "User is already exist.");
       },
       failed: (message, _, exception, stackTrace) async {
-        final result = await _userRepository.createNewUser(data);
+        final result = await _userRepository.createNewUser(
+          data,
+          password: password,
+        );
         return result.when(
           success: (status) async {
-            return login(data.email);
+            return login(data.email, password);
           },
           failed: (message, data, exception, stackTrace) {
             return DataState.failed(
