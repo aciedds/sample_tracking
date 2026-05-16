@@ -1,5 +1,5 @@
 import 'package:daily_reboot_tracker/core/state/view/view_state.dart';
-import 'package:daily_reboot_tracker/features/auth/data/di/auth_providers.dart';
+import 'package:daily_reboot_tracker/features/auth/di/auth_providers.dart';
 import 'package:daily_reboot_tracker/features/auth/presentation/login/state/login_state.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -68,8 +68,10 @@ class LoginViewModel extends StateNotifier<LoginState> {
       submitState: const ViewState<bool>.loading(),
     );
 
-    final usecase = _ref.read(userUsecaseProvider);
-    final result = await usecase.login(state.email.trim(), state.password);
+    final result = await _ref.read(loginUsecaseProvider)(
+      state.email.trim(),
+      state.password,
+    );
 
     result.when(
       success: (_) {

@@ -3,7 +3,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:daily_reboot_tracker/features/history/presentation/history_screen.dart';
 import 'package:daily_reboot_tracker/features/progress/presentation/progress_screen.dart';
 import 'package:daily_reboot_tracker/features/schedule/presentation/schedule_screen.dart';
-import 'package:daily_reboot_tracker/features/workout_session/presentation/start_workout_screen.dart';
+import 'package:daily_reboot_tracker/features/workout/presentation/start_workout_screen.dart';
 import 'package:daily_reboot_tracker/features/home/presentation/view_model/home_view_model.dart';
 
 class HomeScreen extends HookConsumerWidget {

@@ -1,8 +1,8 @@
 import 'dart:io';
 
 import 'package:daily_reboot_tracker/core/state/view/view_state.dart';
-import 'package:daily_reboot_tracker/features/auth/data/di/auth_providers.dart';
-import 'package:daily_reboot_tracker/features/auth/domain/entities/user/user.dart';
+import 'package:daily_reboot_tracker/features/auth/di/auth_providers.dart';
+import 'package:daily_reboot_tracker/features/user/domain/entities/user/user.dart';
 import 'package:daily_reboot_tracker/features/auth/presentation/register/state/register_state.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
@@ -140,8 +140,7 @@ class RegisterViewModel extends StateNotifier<RegisterState> {
       photoUrl: state.displayPicture?.path,
     );
 
-    final usecase = _ref.read(userUsecaseProvider);
-    final result = await usecase.register(
+    final result = await _ref.read(registerUsecaseProvider)(
       data: user,
       password: state.password,
       validatePassword: state.confirmPassword,

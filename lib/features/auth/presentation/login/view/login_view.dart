@@ -6,9 +6,14 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class LoginView extends HookConsumerWidget {
-  const LoginView({super.key, required this.onAuthenticated});
+  const LoginView({
+    super.key,
+    required this.onAuthenticated,
+    required this.onGoToRegister,
+  });
 
   final VoidCallback onAuthenticated;
+  final VoidCallback onGoToRegister;
 
   static OutlineInputBorder _border(Color color) {
     return OutlineInputBorder(
@@ -56,11 +61,14 @@ class LoginView extends HookConsumerWidget {
       focusedBorder: _border(scheme.primary),
     );
 
-    return Padding(
-      padding: const EdgeInsets.all(16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
+    return Scaffold(
+      appBar: AppBar(title: const Text('Masuk')),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
           TextField(
             controller: emailController,
             readOnly: ui.successFieldHighlight,
@@ -125,7 +133,14 @@ class LoginView extends HookConsumerWidget {
                     : const Text('Masuk'),
               ),
             ),
-        ],
+              const SizedBox(height: 16),
+              TextButton(
+                onPressed: ui.successFieldHighlight ? null : onGoToRegister,
+                child: const Text('Belum punya akun? Daftar'),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

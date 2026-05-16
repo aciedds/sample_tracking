@@ -15,7 +15,7 @@ class PostLoginSetupViewModel extends StateNotifier<PostLoginSetupUiState> {
 
   void setPage(int index) => state = state.copyWith(pageIndex: index);
 
-  bool get isLastPage => state.pageIndex == 3;
+  bool get isLastPage => state.pageIndex == 1;
   bool get isFirstPage => state.pageIndex == 0;
 }
 

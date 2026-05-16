@@ -6,9 +6,14 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class RegisterView extends HookConsumerWidget {
-  const RegisterView({super.key, required this.onRegistered});
+  const RegisterView({
+    super.key,
+    required this.onRegistered,
+    required this.onGoToLogin,
+  });
 
   final VoidCallback onRegistered;
+  final VoidCallback onGoToLogin;
 
   static OutlineInputBorder _border(Color color) {
     return OutlineInputBorder(
@@ -58,11 +63,14 @@ class RegisterView extends HookConsumerWidget {
       focusedBorder: _border(scheme.primary),
     );
 
-    return SingleChildScrollView(
-      padding: const EdgeInsets.all(16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
+    return Scaffold(
+      appBar: AppBar(title: const Text('Daftar')),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
           TextField(
             controller: displayNameController,
             readOnly: ui.successFieldHighlight,
@@ -220,7 +228,14 @@ class RegisterView extends HookConsumerWidget {
                     : const Text('Daftar'),
               ),
             ),
-        ],
+              const SizedBox(height: 16),
+              TextButton(
+                onPressed: ui.successFieldHighlight ? null : onGoToLogin,
+                child: const Text('Sudah punya akun? Masuk'),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

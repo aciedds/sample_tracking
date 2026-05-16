@@ -1,7 +1,8 @@
+import 'package:daily_reboot_tracker/features/onboarding/presentation/view_model/post_login_setup_view_model.dart';
+import 'package:daily_reboot_tracker/features/onboarding/presentation/widgets/setup_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:daily_reboot_tracker/features/onboarding/presentation/view_model/post_login_setup_view_model.dart';
 
 class PostLoginSetupScreen extends HookConsumerWidget {
   const PostLoginSetupScreen({super.key, required this.onFinishSetup});
@@ -14,10 +15,6 @@ class PostLoginSetupScreen extends HookConsumerWidget {
     final state = ref.watch(postLoginSetupViewModelProvider);
     final pageController = usePageController();
 
-    final weightController = useTextEditingController();
-    final heightController = useTextEditingController();
-    final ageController = useTextEditingController();
-    final daysController = useTextEditingController(text: '4');
     final repsController = useTextEditingController(text: '12');
     final setsController = useTextEditingController(text: '3');
 
@@ -25,81 +22,14 @@ class PostLoginSetupScreen extends HookConsumerWidget {
       appBar: AppBar(title: const Text('Setup Setelah Login')),
       body: Column(
         children: [
-          LinearProgressIndicator(value: (state.pageIndex + 1) / 4),
+          LinearProgressIndicator(value: (state.pageIndex + 3) / 4),
           Expanded(
             child: PageView(
               controller: pageController,
               physics: const NeverScrollableScrollPhysics(),
               onPageChanged: vm.setPage,
               children: [
-                _SetupCard(
-                  title: 'Onboarding - Profil Fisik',
-                  subtitle: 'BB, tinggi, umur, jenis kelamin (+ BMI/BMR otomatis)',
-                  child: Column(
-                    children: [
-                      TextField(
-                        controller: weightController,
-                        keyboardType: TextInputType.number,
-                        decoration: const InputDecoration(labelText: 'Berat Badan (kg)'),
-                      ),
-                      TextField(
-                        controller: heightController,
-                        keyboardType: TextInputType.number,
-                        decoration: const InputDecoration(labelText: 'Tinggi (cm)'),
-                      ),
-                      TextField(
-                        controller: ageController,
-                        keyboardType: TextInputType.number,
-                        decoration: const InputDecoration(labelText: 'Umur'),
-                      ),
-                      const SizedBox(height: 8),
-                      DropdownButtonFormField<String>(
-                        value: 'Pria',
-                        items: [
-                          DropdownMenuItem(value: 'Pria', child: Text('Pria')),
-                          DropdownMenuItem(value: 'Wanita', child: Text('Wanita')),
-                        ],
-                        onChanged: null,
-                        decoration: InputDecoration(labelText: 'Jenis Kelamin'),
-                      ),
-                    ],
-                  ),
-                ),
-                _SetupCard(
-                  title: 'Target & Konsistensi',
-                  subtitle: 'Tujuan, hari/minggu, level kebugaran',
-                  child: Column(
-                    children: [
-                      DropdownButtonFormField<String>(
-                        value: 'Turun BB',
-                        items: [
-                          DropdownMenuItem(value: 'Turun BB', child: Text('Turun BB')),
-                          DropdownMenuItem(value: 'Naik BB', child: Text('Naik BB')),
-                          DropdownMenuItem(value: 'Maintain', child: Text('Maintain')),
-                        ],
-                        onChanged: null,
-                        decoration: InputDecoration(labelText: 'Goal'),
-                      ),
-                      TextField(
-                        controller: daysController,
-                        keyboardType: TextInputType.number,
-                        decoration: const InputDecoration(labelText: 'Hari Latihan / Minggu'),
-                      ),
-                      const SizedBox(height: 8),
-                      DropdownButtonFormField<String>(
-                        value: 'Beginner',
-                        items: [
-                          DropdownMenuItem(value: 'Beginner', child: Text('Beginner')),
-                          DropdownMenuItem(value: 'Intermediate', child: Text('Intermediate')),
-                          DropdownMenuItem(value: 'Advanced', child: Text('Advanced')),
-                        ],
-                        onChanged: null,
-                        decoration: InputDecoration(labelText: 'Level Kebugaran'),
-                      ),
-                    ],
-                  ),
-                ),
-                _SetupCard(
+                SetupCard(
                   title: 'Susun Jadwal Latihan',
                   subtitle: 'Pilih hari, pilih / buat program',
                   child: Column(
@@ -126,7 +56,7 @@ class PostLoginSetupScreen extends HookConsumerWidget {
                     ],
                   ),
                 ),
-                _SetupCard(
+                SetupCard(
                   title: 'Detail Latihan per Hari',
                   subtitle: 'Gerakan, set, reps, durasi, istirahat',
                   child: Column(
@@ -191,40 +121,6 @@ class PostLoginSetupScreen extends HookConsumerWidget {
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class _SetupCard extends StatelessWidget {
-  const _SetupCard({
-    required this.title,
-    required this.subtitle,
-    required this.child,
-  });
-
-  final String title;
-  final String subtitle;
-  final Widget child;
-
-  @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      padding: const EdgeInsets.all(16),
-      child: Card(
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(title, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-              const SizedBox(height: 6),
-              Text(subtitle, style: const TextStyle(color: Colors.black54)),
-              const SizedBox(height: 16),
-              child,
-            ],
-          ),
-        ),
       ),
     );
   }
